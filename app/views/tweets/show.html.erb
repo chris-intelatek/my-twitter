@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+
+  </div>
+  <div class="panel-body">
+    <p><%= @tweet.user.username %></p>
+    <p><%= @tweet.message %></p>
+    <p><%= image_tag @tweet.picture.url(:medium), class: "img-responsive" %></p>
+    <p>Created on <%= @tweet.created_at.strftime("%d/%m/%y") %> at <%= @tweet.created_at.strftime("%I:%M %p") %></p>
+    <p>Updated on <%= @tweet.updated_at.strftime("%d/%m/%y") %> at <%= @tweet.updated_at.strftime("%I:%M %p") %></p>
+  </div>
+  <% if current_user.id == @tweet.user.id %>
+    <div class="panel-footer">
+      <%= link_to 'Edit', edit_tweet_path(@tweet), class: "btn btn-warning" %>
+      <%= link_to 'Destroy', @tweet, method: :delete, data: { confirm: "are you sure?" }, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+  <%= render 'shared/likes' %>
+</div>

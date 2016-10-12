@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<h1>Not Quite Twitter</h1>
+<div class="row">
+  <% @t.each do |x| %>
+  <div class="col-md-6">
+    <div class ="panel panel-default">
+      <div class="panel-heading">
+
+      </div>
+      <div class="panel-body">
+        By <%= x.user.username %>  on <%= x.created_at.strftime("%d/%m/%y") %> at <%= x.created_at.strftime("%I:%M %p") %>
+        <p><%= x.message[0...250] %>...[<%= link_to "read more", x %>]</p>
+        <p><%= image_tag x.picture.url(:thumb) %></p>
+        <p>Updated on <%= x.updated_at.strftime("%d/%m/%y") %> at <%= x.updated_at.strftime("%I:%M %p") %></p>
+        <% if current_user.likes?(x) %>
+          <%= link_to "Unlike", tweet_like_path(x), method: :delete, class: 'glyphicon glyphicon-thumbs-down btn btn-primary' %>
+        <% else %>
+          <%= link_to "Like", tweet_like_path(x), method: :post, class: 'glyphicon glyphicon-thumbs-up btn btn-primary' %>
+        <% end %>
+        (<%= x.likes.count %>)
+        
+      </div>
+      <% if current_user.id == x.user.id %>
+        <div class="panel-footer">
+          <%= link_to "Edit", edit_tweet_path(x), class: "btn btn-warning" %>   
+          <%= link_to "Delete", x, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+         </div>
+      <% end %>
+    </div>
+   </div>
+  <% end %>
+</div>
+<%= link_to 'New Tweet', new_tweet_path, class: "btn btn-primary"%></li>
