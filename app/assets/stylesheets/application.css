@@ -31,3 +31,12 @@
 body {
     background-color: skyblue;
 }
+
+.navpic {
+    height: 40px;
+    width: 40px;
+    position: relative;
+    top: 5px;
+    float: left;
+    left: -5px;
+}

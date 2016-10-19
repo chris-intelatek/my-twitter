@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "profiles/:id" => "profiles#show", as: :profile
   get "profiles" => "profiles#index"
   get "feed" => 'profiles#feed'
+  
   root 'tweets#index'
   resources :relationships, only: [:create, :destroy]
   resources :tweets do
